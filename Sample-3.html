@@ -12,6 +12,9 @@
         console.log($('table tr:hidden'))
         console.log( $('td').filter(function(){return this.innerHTML.match(/^\d+$/)}));
         console.log($('*').slice(2))
+        console.log($('table').find('th'))
+        //console.log($('table').contains('td'))
+        console.log($('*').is('table'))
       });
     </script>
   </head>
