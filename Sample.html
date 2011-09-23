@@ -14,6 +14,21 @@
             console.log('frg');
           });
       });
+      $(function(){
+        $('p a#hide').click(function() {
+          $('p a#show').show();
+          $('p a#hide').hide();
+          $('#text').hide();
+          return(false);
+        });
+        
+        $('p a#show').click(function() {
+          $('#show').hide();
+          $('#hide').show();
+          $('#text').show();
+          return(false);
+        });
+      });
       $.fn.disable = function() {
         console.log('disable');
         return this.each(function() {
@@ -43,6 +58,11 @@
       </tr>
     </table>
     <p id = "followMe">Follow me!</p>
+    <p align = "center">
+      <a id = "hide" href = "#" >Hide</a>
+      <a id = "show" href = "#" style = "display: none">Find Me</a>
+      <h3 id = "text"> Hi i m here</h3>
+    </p>
     <input type = "button" id = "test_button" name = "click" value = "name">
   </body>
 </html>
