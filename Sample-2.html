@@ -26,6 +26,12 @@
         console.log($('a:odd'));
         console.log($('a:eq(5)'))
         console.log($('a:gt(5)'))
+        $("<div class='foo'>I have foo!</div><div>I don't</div>").filter(".foo").click(function() {
+          alert("I'm foo!");
+        }).end().appendTo("#fo");
+        var n = $('a[id]').add('a').index($('div#fo a')[1]);
+        console.log(n);
+        console.log($('div#form').add('<h4>Hi!</h4>'));
       });
     </script>
   </head>
@@ -47,7 +53,7 @@
         </ul>
       </li>
     </ul>
-    <div title = "form">
+    <div title = "form" id = "fo">
       <a href = "#">bbbb</a>
       <a href = "#">aaaa</a>
       <a href = "#">cccc</a>

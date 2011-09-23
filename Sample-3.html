@@ -8,6 +8,10 @@
         console.log($('table#languages td:first-child'));
         console.log($('table#languages td:nth-child(2n)'))
         console.log($('table#languages td:nth-child(2n + 1)'))
+        console.log($('table tr:parent'))
+        console.log($('table tr:hidden'))
+        console.log( $('td').filter(function(){return this.innerHTML.match(/^\d+$/)}));
+        console.log($('*').slice(2))
       });
     </script>
   </head>
