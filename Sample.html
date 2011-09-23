@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Sample</title>
+    <link href = "style.css" rel = "stylesheet" type = "text/css">
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type = "text/javascript">
+    </script>
+    <script type = "text/javascript" >
+      console.log('eee');
+      $(document).ready(function(){
+        $('table tr:nth-child(even)').css('background-color','red');
+        $('#test_button').click(function() {
+            console.log('frg');
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <table align = "center">
+      <tr>
+        <td>a</td>
+        <td>b</td>
+      </tr>
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <tr>
+          <td>a</td>
+          <td>b</td>
+        </tr>
+        <tr>
+          <td>a</td>
+          <td>b</td>
+        </tr>
+      </tr>
+    </table>
+    <input type = "button" id = "test_button" name = "click" value = "name">
+  </body>
+</html>
