@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Sample-3</title>
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type = "text/javascript">
+    </script>
+    <script type = "text/javascript" >
+      $(function() {
+        console.log($('table#languages td:first-child'));
+        console.log($('table#languages td:nth-child(2n)'))
+        console.log($('table#languages td:nth-child(2n + 1)'))
+      });
+    </script>
+  </head>
+  <body>
+    <table id="languages">
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>Type</th>
+          <th>Invented</th>
+        </tr>
+      </thead>
+      <tbody> 
+        <tr>
+          <td>Java</td>
+          <td>Static</td>
+          <td>1995</td>
+          <td>wanted</td>
+        </tr> 
+        <tr>
+          <td>Ruby</td>
+          <td>Dynamic</td>
+          <td>1993</td>
+        </tr>
+        <tr>
+          <td>Smalltalk</td
+          <td>Dynamic</td>
+          <td>1972</td>
+        </tr>
+        <tr>
+          <td>C++</td>
+          <td>Static</td>
+          <td>1983</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

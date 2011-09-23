@@ -11,10 +11,21 @@
         //match any element
         console.log($('div[title*=o]'))
         //match all the element a tag in li 
-        console.log($('li:has(a)'))
-        console.log($('ul:has(a)'))
-        console.log($('ul + div'))
-        console.log($('a[href$=s]'))
+        console.log($('li:has(a)'));
+        console.log($('ul:has(a)'));
+        console.log($('ul + div'));
+        console.log($('a[href$=s]'));
+        console.log($('a:only-child'));
+        console.log($('a:first'));
+        console.log($('a:last'));
+        console.log($('a:last-child'));
+        console.log($('a:first-child'));
+        console.log($('li:nth-child(1)'));
+        //it start from 3rd tag and displat every 2nd tag
+        console.log($('a:nth-child(2n + 3)'));
+        console.log($('a:odd'));
+        console.log($('a:eq(5)'))
+        console.log($('a:gt(5)'))
       });
     </script>
   </head>
@@ -36,6 +47,12 @@
         </ul>
       </li>
     </ul>
-    <div title = "form">Form</div>
+    <div title = "form">
+      <a href = "#">bbbb</a>
+      <a href = "#">aaaa</a>
+      <a href = "#">cccc</a>
+      <a href = "#">dddd</a>
+      <a href = "#">ffff</a>
+    </div>
   <body>
 </html>
