@@ -5,11 +5,16 @@
       </script>
       <script type = "text/javascript">
         $(function() {
-          $("<div class = 'second_div'>click here</div><div>don't click here</div>").filter(".second_div").click(function() {
+          $("<div class = 'second_div'>click here</div><div class = 'dont_click'>don't click here</div>").filter(".second_div").click(function() {
             alert("I'm foo!");
           }).end().appendTo("#first_div");
+          $(".dont_click").click(function(){
+            alert("Bye!");
+              $(this).remove();
+          });
         });
       </script>
+      
     </head>
   <body>
     <div id = "first_div">
