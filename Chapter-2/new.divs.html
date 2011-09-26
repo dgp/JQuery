@@ -11,7 +11,7 @@
           }).end().appendTo("#first_div");
           $(".dont_click").click(function(){
             alert("bye!");
-            $('#first_div h3:first').remove();
+            $('#first_div h3:first-child').remove();
             return(false);
           });
         });

@@ -10,6 +10,11 @@
           $('h3').each(function(n){
             alert('this is h3 tag [ '+ n +' ]' + this.id);
           });
+          $('*').attr('title', function(index) {
+            return 'element' + index  + (this.id ? this.id : "unset");
+          });
+          
+          $('*').attr({value: " " });
         });
       </script>
   </head>
@@ -22,6 +27,9 @@
     </h3>
     <h3 id = "baz">
       hi baz
+    </h3>
+    <h3>
+      hi dinesh
     </h3>
       
   </body>

@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>
+      Iterator
+    </title>
+      <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type ="text/javascript">
+      </script>
+      <script type = "text/javascript">
+        $(function() {
+          $('#submit').click(function() {
+            $(this).attr('disabled', 'disabled');
+            $('*').attr('title', function(index) {
+              return 'element' + index  + (this.id ? this.id : "unset");
+            });
+          
+            $('*').attr({name: " " }).addClass('die');
+          
+            $('h3').removeAttr('title');
+          });
+        });
+        
+        $(function() {
+          $('h1#click_here').click(function() {
+            $("#submit").removeAttr('disabled', 'disabled');
+            $('*').removeClass('die');
+          });
+        });
+      </script>
+      <style>
+        .die{
+          background-color: red;
+        }
+        h1{
+          color: white;
+        }
+      </style>
+  </head>
+  <body>
+    <h3 id = "foo">
+      hi foo
+    </h3>
+    <h3 id = "bar">
+      hi bar
+    </h3>
+    <h3 id = "baz">
+      hi baz
+    </h3>
+    <h1 align = "center">Game Over</h1>
+    <input type = "submit" id = "submit" value = "click me" />
+    <h1 align = "center" id = "click_here">Click here</h1>
+  </body>
+</html>
