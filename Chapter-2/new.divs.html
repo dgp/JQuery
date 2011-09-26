@@ -5,12 +5,14 @@
       </script>
       <script type = "text/javascript">
         $(function() {
-          $("<div class = 'second_div'>click here</div><div class = 'dont_click'>don't click here</div>").filter(".second_div").click(function() {
+          $("<a href = '#' class = 'click_here'>click here</a><br/><a href = '#' class = 'dont_click'>don't click here</a>").filter(".click_here").click(function() {
             alert("I'm foo!");
+            return(false);
           }).end().appendTo("#first_div");
           $(".dont_click").click(function(){
-            alert("Bye!");
-              $(this).remove();
+            alert("bye!");
+            $('#first_div h3:first').remove();
+            return(false);
           });
         });
       </script>
