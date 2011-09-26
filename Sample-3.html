@@ -15,6 +15,8 @@
         console.log($('table').find('th'))
         //console.log($('table').contains('td'))
         console.log($('*').is('table'))
+        console.log($('table').clone().appendTo('#d').end().addClass('beenCloned'));
+        console.log($('*').andSelf())
       });
     </script>
   </head>
@@ -51,5 +53,6 @@
         </tr>
       </tbody>
     </table>
+    <div id = "d"></div>
   </body>
 </html>
