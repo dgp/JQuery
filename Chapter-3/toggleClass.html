@@ -13,11 +13,14 @@
         var height = $('p:first').height();
         alert("width:" + width + " " + "height:" + height);
         alert("class name is present in last <p> :" + $('p:last').hasClass('a'));
-      });
-      function swap(){
-        $('tr').toggleClass('striped')
-      }
-      
+
+        $('tr').mouseover(function(){
+          $('tr').toggleClass('striped')
+        });
+        $('tr').mouseout(function(){
+          $('tr').toggleClass('striped')
+        });
+      });      
     </script>
     <style>
       .striped {
@@ -26,7 +29,7 @@
     </style>
   </head>
   <body>
-    <table onmouseover="swap();" onmouseout="swap();" align = "center">
+    <table align = "center" id = "t">
       <tr>
         <td>a</td>
         <td>b</td>
