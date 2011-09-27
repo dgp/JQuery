@@ -10,5 +10,5 @@
     var toggle_row = function() {
       $('tr').toggleClass('striped');      
     };
-    $('tr').mouseover(toggle_row).mouseout(toggle_row);
+    $('tr').bind('mouseover', toggle_row).bind('mouseout', toggle_row);
   });      
