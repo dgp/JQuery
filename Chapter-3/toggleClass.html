@@ -9,9 +9,10 @@
       $(function() {
         $('table tr:nth-child(even)').addClass('striped')
         $('p').css('color', 'violet');
-        var width = $('p').width();
-        var height = $('p').height();
+        var width = $('p:first').width();
+        var height = $('p:first').height();
         alert("width:" + width + " " + "height:" + height);
+        alert("class name is present in last <p> :" + $('p:last').hasClass('a'));
       });
       function swap(){
         $('tr').toggleClass('striped')
@@ -44,5 +45,7 @@
       </tr>
     </table>
     <p> This is from activesphere</p>
+    <p> Line1</p>
+    <p> Line2</p>
   </body>
 </html>

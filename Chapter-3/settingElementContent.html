@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Sample</title>
+    <link href = "style.css" rel = "stylesheet" type = "text/css">
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type = "text/javascript">
+    </script>
+    <script type = "text/javascript" >
+      console.log('eee');
+      $(function() {
+        $('p').css('color', 'violet');
+        alert($('p:first').html());
+        var text = $('p').text();
+        alert(text);
+        $('p:last').append(" " + $('p:first').html());
+        $('p:last').prependTo($('p:first'));
+        $('p:last').wrapInner('p:first')
+        $("div.replace").before("<pre>I am replacing the div</pre>").remove();
+        $('pre').clone().appendTo('p:first');
+        $('p').wrap('<div></div>')
+      });
+    </script>
+   </head>
+  <body>
+    <p>ActiveSphere</p>
+    <p> Line1</p>
+    <p> Line2</p>
+    <div class = "replace">Hi</div>
+  </body>
+</html>
