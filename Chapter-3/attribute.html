@@ -24,6 +24,14 @@
             $("#submit").removeAttr('disabled', 'disabled');
             $('*').removeClass('die');
           });
+          //toggle class
+          $(function() {
+            $('a').click(function() {
+              $('#toggle').toggle();
+              return false;
+            });
+          });
+          
         });
       </script>
       <style>
@@ -32,6 +40,12 @@
         }
         h1{
           color: white;
+        }
+        #toggle{
+          display: none;
+        }
+        .change_color{
+          color: black;
         }
       </style>
   </head>
@@ -48,5 +62,9 @@
     <h1 align = "center">Game Over</h1>
     <input type = "submit" id = "submit" value = "click me" />
     <h1 align = "center" id = "click_here">Click here</h1>
+    <a href = "#">Toggle</a>
+    <div id = "toggle">
+      <h1>This is Small Game(hide and show)</h1>
+    </div>
   </body>
 </html>
