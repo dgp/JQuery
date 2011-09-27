@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Sample</title>
+    <link href = "style.css" rel = "stylesheet" type = "text/css">
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type = "text/javascript">
+    </script>
+    <script type = "text/javascript" >
+      $(function() {
+        alert('Enter some text in the textbox');
+        $('#input').keyup(function() {
+          var result = $('#input').val();
+          $("#output").text(result).css('color', 'orange');
+        });
+        $('[type = radio]').click(function() {
+          $('#radio_result').text( "you are "+ $('[name = select]:checked').val());
+        });
+        $('input,select').val(['one','two','three']);
+      });
+    </script>
+   </head>
+  <body>
+    <input type = "text" id = "input" name = "input">
+    <div id = "output"></div>
+    <input type = "radio" name = "select" value = "in">click here
+    <br/>
+    <input type = "radio" name = "select" value = "out">click here
+    <div id = "radio_result"></div>
+ </body>
+</html>
