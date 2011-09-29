@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type = "text/javascript">
+    </script>
+    <script type = "text/javascript" src = "event.js">
+    </script>
+    <style>
+      #item{
+        margin: 150px 0px 0px 600px;
+        width: 400px;
+        height: 150px;
+        border: 2px solid gray;
+      }
+      #juice, #food{
+        padding: 35px 0 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = "item">
+      <div id = "juice">
+        <input type = "checkbox" value = "juice" name = "juice" id = "checkBox_juice">Juice
+        <span>
+          <input type = "radio" data_price = '50' value = "mango" name = "juice" id = "mango">Mango
+          <input type = "radio" data_price = '100' value = "apple" name = "juice" id = "apple">Apple
+          <span class = 'output'>
+            <input type = "text" value = "1" class = "quantity">$<span id = "price"></span>
+          </span>
+        </span>
+      </div>
+      <div id = "food">
+        <input type = "checkbox" value = "food" name = "food" id = "checkBox_food" >Food
+        <span>
+          <input type = "radio" data_price = '20' value = "dosa" name = "food" id = "dosa">Dosa
+          <input type = "radio" data_price = '10' value = "idly" name = "food" id = "idly">Idly
+          <span class = 'output'>
+            <input type = "text" value = "1" class = "quantity">$<span id = "price"></span>
+          </span>
+        </span>
+      </div>
+    </div>
+    <input type = "button" value = "bind" id = "foo">
+  </body>
+</html>
