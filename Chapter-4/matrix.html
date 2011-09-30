@@ -11,11 +11,23 @@
       li{
         list-style-type: none;
       }
+      span{
+        margin-right: 110px;
+      }
+      #prices_list {
+        margin-left: 130px;
+      }
     </style>
   </head>
   <body>
-    <input type = "button" name = "form_grid" value = "form_grid" id = "form_grid">
+    <div id = "form">
+      <input type = "text" name = "row" id = "row" title = "row">
+      <input type = "text" name = "column" id = "column" title = "column">
+      <input type = "button" name = "create_grid" value = "Create Grid" id = "create_grid">
+    </div>
     <div style = "height: auto; width: auto;" id = "grid">
+    </div>
+    <div id = "prices_list">
     </div>
     <div id = "input">
       <input type = "button" name = "add_row" value = "Add row" id = "add_row">

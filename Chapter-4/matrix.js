@@ -1,17 +1,20 @@
 $(function() {
   var grid = {
-    row : 10, 
-    column : 10, 
+    row : 0, 
+    column : 0, 
     total : 0,
     price : 0,
+    prices : [ ],
     show_content : function() {
       $('#input').show();
+      $('#output').show();
     },
     hide_content : function() {
+      $('#output').hide();
       $('#input').hide();
     },
     create_row_with_text : function(i, j) {
-      $('#grid ul li#row' + i).append("<input type = 'text' id = column-" + i + j + ">");
+      $('#grid ul li#row' + i).append("<input type = 'text' id = column-" + i + j + " class =" + j + ">");
     },
     create_li_tag : function(row_id) {
       $('#grid ul').append("<li id=row"+ row_id + "></li>");
@@ -19,7 +22,16 @@ $(function() {
     create_ui_tag : function() {
       $('#grid').append('<ul></ul>');
     },
-    init : function() {
+    create_span_tag : function() {
+      var i = 0;
+      for ( i = 0; i < grid.row; i++) {
+        $('#prices_list').append("<span id = span" + i + "></span>");
+        grid.prices[i] = 0;
+      }
+    },
+    init : function(row, column) {
+      grid.row = row;
+      grid.column = column;
       grid.create_ui_tag();
       for (var i = 0; i < grid.row; i++) {
         grid.create_li_tag(i);
@@ -27,6 +39,7 @@ $(function() {
           grid.create_row_with_text(i, j);
         }
       }
+      grid.create_span_tag();
       grid.show_content();
     },
     add_row : function() {
@@ -55,17 +68,22 @@ $(function() {
     },
     calculate_price : function(obj) {
       grid.price = $(obj).val();
-      console.log(grid.price);
+      grid.calculate_indivdual_price(obj, grid.price);
       grid.total = grid.addNumber(grid.total, grid.price);
-      console.log(grid.total);
       $('#output').text(grid.total);
+    },
+    calculate_indivdual_price : function(current_obj, price) {
+      var class_number;
+      class_number = $(current_obj).attr('class');
+      grid.prices[parseInt(class_number, 10)] = grid.addNumber(grid.prices[parseInt(class_number, 10)], price);
+      $('#prices_list #span' + class_number).text(grid.prices[parseInt(class_number, 10)] );
     }
   };
 
   grid.hide_content();
 
-  $('#form_grid').one('click', function() {
-    grid.init();
+  $('#create_grid').one('click', function() {
+    grid.init($('#row').val(), $('#column').val());
   });
 
   $('#add_row').click(function () {
@@ -77,7 +95,9 @@ $(function() {
   });
 
   $(':text').live('change', function() {
-    grid.calculate_price(this);
+    if ($(this).attr('id') != 'row' && $(this).attr('id') != 'column') {
+      grid.calculate_price(this);
+    }
   });
   
   // new Grid({rows:10, columns:10}).show();
