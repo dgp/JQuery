@@ -3,7 +3,6 @@ $(function() {
     row : 0, 
     column : 0, 
     total : 0,
-    price : 0,
     prices : [ ],
     show_content : function() {
       $('#input').show();
@@ -24,7 +23,7 @@ $(function() {
     },
     create_span_tag : function() {
       var i = 0;
-      for ( i = 0; i < grid.row; i++) {
+      for ( i = 0; i < grid.column; i++) {
         $('#prices_list').append("<span id = span" + i + "></span>");
         grid.prices[i] = 0;
       }
@@ -62,14 +61,20 @@ $(function() {
         }
       }
       grid.column = next_column + 1;
+      $('#prices_list').append("<span id = span" + next_column + "></span>");
+      grid.prices[next_column] = 0;
     },
     addNumber : function(a, b) {
       return ((parseInt(a, 10)+parseInt(b, 10)));
     },
     calculate_price : function(obj) {
-      grid.price = $(obj).val();
-      grid.calculate_indivdual_price(obj, grid.price);
-      grid.total = grid.addNumber(grid.total, grid.price);
+      var price = $(obj).val();
+      var pattern = /^[0-9]+/;
+      if (!pattern.test(price)) {
+        return false;
+      }
+      grid.calculate_indivdual_price(obj, price);
+      grid.total = grid.addNumber(grid.total, price);
       $('#output').text(grid.total);
     },
     calculate_indivdual_price : function(current_obj, price) {
@@ -79,11 +84,11 @@ $(function() {
       $('#prices_list #span' + class_number).text(grid.prices[parseInt(class_number, 10)] );
     }
   };
-
-  grid.hide_content();
-
+  var grid_1 = grid;
+  grid_1.hide_content();
+  
   $('#create_grid').one('click', function() {
-    grid.init($('#row').val(), $('#column').val());
+    grid_1.init($('#row').val(), $('#column').val());
   });
 
   $('#add_row').click(function () {
