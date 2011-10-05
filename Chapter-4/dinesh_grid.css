@@ -1,0 +1,10 @@
+.total {
+  color: green;
+}
+.row_total {
+  color: red;
+  margin-left: 50px;
+}
+.list_style {
+  list-style: none;
+}

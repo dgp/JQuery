@@ -1,6 +1,7 @@
 $(function () {
   (function ( $ ) {
     var grid_frame  = {
+      pattern : /^[0-9]+/,
       setData : function(id) {
         $('#' + id).data('dinesh_grid', {
           row_number : 0,
@@ -14,7 +15,7 @@ $(function () {
       },
       create_a_row : function(row_id, id) {
         $('ul#table'+ id).append("<li id=row" + id + row_id + "></li>");
-        $('li').css('list-style', 'none');
+        $('li').addClass('list_style');
       },
       create_grid : function(id) {
         $('#' + id).append('<ul id = table'+ id +'></ul>');
@@ -27,7 +28,7 @@ $(function () {
         $('#' + id).append("<div id = row_total"+ id +"></div>");
         for (var i = 0; i < current_object.column_number; i++) {
           $('#row_total'+ id).append("<span id = span"+ id + i + "></span>");
-          $('#row_total' + id).css('margin-left', '50px');
+          $('#row_total' + id).addClass('row_total');
           current_object.row_total[i] = 0;
         }
       },
@@ -78,14 +79,13 @@ $(function () {
       },
       calculate_total : function(obj, div_id) {
         var price = $(obj).val();
-        var pattern = /^[0-9]+/;
         var current_object = $('#' + div_id).data('dinesh_grid');
-        if (!pattern.test(price)) {
+        if (!grid_frame.pattern.test(price)) {
           return false;
         }
         grid_frame.calculate_indivdual_total(obj, price, div_id);
         current_object.total = grid_frame.addNumber(current_object.total, price);
-        $('#'+ div_id + ' #output'+ div_id).text('Total: ' + current_object.total).css('color', 'green');
+        $('#'+ div_id + ' #output'+ div_id).text('Total: ' + current_object.total).addClass('total');
       },
       calculate_indivdual_total: function(obj, price, div_id) {
         var class_number;
@@ -124,7 +124,4 @@ $(function () {
       });
     }
   }(jQuery));
-  $('#grid').dinesh1_grid();
-  $('#grid1').dinesh1_grid({row:3, column: 2});
-  $('#grid2').dinesh1_grid({row:6, column: 5});
 });
