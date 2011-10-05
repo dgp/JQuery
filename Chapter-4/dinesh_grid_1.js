@@ -11,7 +11,8 @@ $(function () {
         $('#' + object).data('dinesh_grid', {
           row_number : 0,
           column_number : 0,
-          row_total : [ ]
+          row_total : [ ],
+          total : 0
         });
       },
       init : function(row, column, div_id) {
@@ -49,7 +50,7 @@ $(function () {
           $('#row_total'+ div_id).append("<span id = span"+ div_id + i + "></span>");
           current_object.row_total[i] = 0;
         }
-        $('#row_total' + id).css('margin-left', '50px');
+        $('#row_total' + div_id).css('margin-left', '50px');
       },
       add_row : function(div_id) {
       var current_object = $('#'+ div_id).data('dinesh_grid');
@@ -88,7 +89,7 @@ $(function () {
         }
         grid_frame.calculate_indivdual_total(obj, price, div_id);
         current_object.total = grid_frame.addNumber(current_object.total, price);
-        $('#output' + div_id).text(current_object.total);
+        $('#output' + div_id).text('Total: ' + current_object.total).css('color', 'green');;
       },
       calculate_indivdual_total: function(obj, price, div_id) {
         var class_number;
@@ -106,10 +107,17 @@ $(function () {
           grid_frame.create_text(this, i, current_div_id);
         }
         grid_frame.grid_button('submit', 'form_grid', current_div_id);
-        $('#submit' + current_div_id).one('click', function() {
+        $('#submit' + current_div_id).bind('click', function() {
           var current_object_id = $(this).parent().attr('id');
+          var a = $('#text' + current_object_id + '1').val();
+          var b = $('#text' + current_object_id+ '2').val();
+          var pattern = /^[0-9]+/;
+          if (!pattern.test(a) && !pattern.test(b)) {
+            return false;
+          }
+          $('#submit' + current_div_id).unbind();
           console.log(current_object_id);
-          grid_frame.init($('#text' + current_object_id + '1').val(), $('#text' + current_object_id+ '2').val(), current_object_id);
+          grid_frame.init(a, b, current_object_id);
         });
         $('#add_row' + current_div_id).live('click', function () {
           var current_object_id = $(this).parent().attr('id');
