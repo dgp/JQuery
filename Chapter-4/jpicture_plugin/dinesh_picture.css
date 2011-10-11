@@ -16,7 +16,7 @@ a#previous {
   top: 215px;
   left: 30px;
   text-indent: -9999px;
-  background: url('images/left.png') no-repeat scroll top left;
+  background: url(images/left.png) no-repeat scroll top left;
   -webkit-transition: left 0.1s ease-out;
   -o-transition: left 0.1s ease-out;
   -moz-transition: right 0.1s ease-out;
@@ -29,7 +29,7 @@ a#next {
   top: 215px;
   right: 30px;
   text-indent: -9999px;
-  background: url('images/right.png') no-repeat scroll top left;
+  background: url(images/right.png) no-repeat scroll top left;
   -webkit-transition: left 0.1s ease-out;
   -o-transition: left 0.1s ease-out;
   -moz-transition: right 0.1s ease-out;
