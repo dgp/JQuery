@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .block {
+      width: 1000px;
+      overflow: hidden;
+    }
+    .image {
+      width: 4000px;
+      height: 270px;
+    }
+    img {
+      position: relative;
+      background-color:#abc;
+      float: left;
+      width:250px;
+      height:260px;
+    }
+    .footer {
+      text-decoration: none;
+      padding-right: 10px;
+    }
+    a {
+      text-decoration: none;
+      margin-right: 10px;
+    }
+</style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" >
+    $(function() {
+      var place = 1;
+      $("#right").attr('disabled', 'disabled');
+      // body...
+      $("#right").click(function(){
+        console.log(--place);
+        if (place === 1) {
+          $("#right").attr('disabled', 'disabled');
+        }
+        $("img").animate({"left": "+=250px"}, "slow");
+        $("#left").removeAttr('disabled', 'disabled');
+      });
+
+      $("#left").click(function(){
+        console.log(++place);
+        if (place === (size - 4)) {
+          $("#left").attr('disabled', 'disabled');
+        // }
+        $("img").animate({"left": "-=250px"}, "slow");
+        $("#right").removeAttr('disabled', 'disabled');
+      });
+      var size = $('.image img').size();
+      for (var i = 0; i < size; i++) {
+        console.log("i"+i);
+        footer((parseInt(i, 10) + 1));
+      }
+      function footer(i) {
+        $('.block').append("<a href ='#' id = " + i + ">" + i + "</a>");
+      }
+      var first_click = 0;
+      $('a').click(function() {
+        var current_postion = $(this).text();
+        place = current_postion;
+        var postion = (parseInt(current_postion, 10)-1) * 250;
+        for(var j = 0; j < 4; j++) {
+          if(current_postion != "" +(parseInt(size,10) - j)) {
+            $("#left").removeAttr('disabled', 'disabled');
+          }
+          if (current_postion === "" + (parseInt(size,10) - j)) {
+            console.log('size1' + size);
+            if (first_click === 0) {
+              var postion = (parseInt(current_postion, 10) - 4) * 250;
+              $("img").animate({"left": -postion + "px"}, "slow");
+              first_click++;
+            }
+            $("#left").attr('disabled', 'disabled');
+            return;
+          }
+        }
+        if (current_postion === "1") {
+          first_click = 0;
+          $("#right").attr('disabled', 'disabled');
+          $("img").animate({"left": -postion + "px"}, "slow");  
+        }
+        else
+        {
+          $("img").animate({"left": -postion + "px"}, "slow");
+        }
+
+        if(current_postion != '1' ) {
+          $("#right").removeAttr('disabled', 'disabled');
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+<div class="block">
+  <button id="left">&laquo;</button> 
+  <div class = "image">
+      <img src = "Earth.gif">
+      <img src = "2.jpeg">
+      <img src = "3.jpeg">
+      <img src = "4.jpeg">
+      <img src = "5.jpeg">
+      <img src = "Earth.gif">
+      <img src = "2.jpeg">
+      <img src = "3.jpeg">
+      <img src = "4.jpeg">
+      <img src = "5.jpeg">
+      <img src = "Earth.gif">
+      <img src = "2.jpeg">
+      <img src = "3.jpeg">
+      <img src = "4.jpeg">
+      <img src = "5.jpeg">
+  </div>
+  <button id="right">&raquo;</button>
+</div>
+</body>
+</html>
