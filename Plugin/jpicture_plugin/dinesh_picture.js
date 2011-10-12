@@ -119,11 +119,12 @@ $(function() {
         console.log((current_object.last_position >= (size - visible + 1)));
         if (current_position > (size - parseInt(visible, 10))) {
           for(var i = 0; i < visible; i++) {
-            if (current_position === "" + ((parseInt(size,10) - i)) || current_position === ((parseInt(size,10) - lt_width))) {
+            if (current_position === "" + ((parseInt(size,10) - i)) || current_position === ((parseInt(size,10) - i))) {
               if (current_object.first_click_scroll === 0) {
                 if(current_object.last_position == 0) {
                   scroll_position = (((parseInt(current_position, 10) - (parseInt(visible) - i)) - parseInt(current_object.last_position, 10)) * lt_width);
                 } else {
+                  console.log('5');
                   scroll_position = ((parseInt(current_position, 10) - parseInt(current_object.last_position) - (parseInt(visible) - (i + 1))) * lt_width);
                 }
                 current_object.first_click_scroll++;
@@ -146,13 +147,20 @@ $(function() {
           current_object.first_click_scroll = 0;
           scroll_position = (parseInt(current_position, 10) - (parseInt(current_object.last_position, 10))) * lt_width;
         }
-        if(current_position >= 20 && current_object.last_position < 20) {
+        if(current_position >= 20 && current_object.last_position < 20 && current_object.last_position != 0) {
            scroll_position += 6;
            console.log('scrol+' + scroll_position);
-         } else if (current_position <= 20 && current_object.last_position > 20) {
+         } else if (current_position <= 20 && current_object.last_position > 20  && current_object.last_position != 0) {
            scroll_position -= 7;
            console.log('scrol-' + scroll_position);
          }
+         if(current_position >= 10 && current_object.last_position < 10 && size < 20) {
+            scroll_position += 6;
+            console.log('scrol+' + scroll_position);
+          } else if (current_position <= 10 && current_object.last_position > 10 && size < 20) {
+            scroll_position -= 7;
+            console.log('scrol-' + scroll_position);
+          }
         $("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow");
       }
     };
