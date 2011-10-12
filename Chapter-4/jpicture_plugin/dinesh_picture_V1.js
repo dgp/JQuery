@@ -34,24 +34,18 @@ $(function() {
           'height' : img_height
         });
       },
-      set_scroll_number_in_footer : function(size, visible, list_width) {
-        $('#picture_content').append('<div id = scroll></div>');
-        var lt_width = parseInt(list_width, 10);
+      set_scroll_number_in_footer : function(size, visible) {
+        $('#picture_content').append('<center id = scroll></center>');
         for (var i = 1; i <= size; i++) {
           console.log(i);
-          $('#picture_content #scroll').append("<li><a href ='#' id = " + i + ">" + i + "</a></li>");
+          $('#picture_content #scroll').append("<a href ='#' id = " + i + ">" + i + "</a>");
         }
-        $('#scroll').css({'width': (size * (lt_width)) });
-        $('#scroll li').css({'width': list_width});
-        $('#scroll').append('<div id = active></div>');
         var right_position = 0;
         if (size%2 === 0) {
           right_position = size/2 - 2; 
         } else {
           right_position = Math.floor(size/2) - 1;
         }
-        console.log('mat' + (right_position));
-        $('#active').css({'width': (visible * (lt_width - 2)) + 'px'});
         $('a').addClass('footer');
       },
       hide_arrows : function(visible, size, width) {
@@ -89,6 +83,7 @@ $(function() {
                 $("img").animate({"left": '-=' + position + "px"}, "slow");
                 current_object.first_click++;
               }
+              $('#active').css({'width': (visible * 38) + 'px', 'right': '150px'});
               //by arrow it reach last hide the next arrow
               $("#next").hide();
               //by clicking number
@@ -112,58 +107,47 @@ $(function() {
         $('#scroll a').removeClass('selected');
         $('.image_grid img').removeClass('image_selected');
       },
-      scroll_movement : function(current_position, size, visible, list_width) {
+      scroll_movement : function(current_position, size, visible) {
         var scroll_position = 0;
-        var lt_width = parseInt(list_width, 10) - 1;
         var current_object = $('#picture_content').data('dinesh_picture');
-        console.log((current_object.last_position >= (size - visible + 1)));
+        $('#scroll a').removeClass('selected1')
         if (current_position > (size - parseInt(visible, 10))) {
           for(var i = 0; i < visible; i++) {
-            if (current_position === "" + ((parseInt(size,10) - i)) || current_position === ((parseInt(size,10) - lt_width))) {
+            if (current_position === "" + ((parseInt(size,10) - i)) || current_position === ((parseInt(size,10) - i))) {
               if (current_object.first_click_scroll === 0) {
                 if(current_object.last_position == 0) {
-                  scroll_position = (((parseInt(current_position, 10) - (parseInt(visible) - i)) - parseInt(current_object.last_position, 10)) * lt_width);
+                  console.log((current_position + i));
+                  image_plugin.apply_style((parseInt(current_position, 10) + i), visible);
                 } else {
-                  scroll_position = ((parseInt(current_position, 10) - parseInt(current_object.last_position) - (parseInt(visible) - (i + 1))) * lt_width);
+                  scroll_position = ((parseInt(current_position, 10) - parseInt(current_object.last_position) - (parseInt(visible) - (i + 1))) * 36);
                 }
                 current_object.first_click_scroll++;
               }
             }
           }
         } else if(current_object.last_position == 0) {
-          console.log('1');
           current_object.first_click_scroll = 0;
-          scroll_position = (parseInt(current_position, 10) - 1) * lt_width + parseInt(current_position, 10);
+          image_plugin.apply_style(current_position, visible);
           // console.log($("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow"));
         } else if ((current_object.last_position >= (size - visible + 1)) && (current_object.last_position < current_position )) {
-          console.log('2');
-          scroll_position = (parseInt(current_position, 10) - ((size - visible) + 1)) * lt_width;
+          scroll_position = (parseInt(current_position, 10) - ((size - visible) + 1)) * 36;
           // console.log($("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow"));
-        } else if((current_object.last_position >= (size - visible + 1)) && (current_object.last_position > current_position )) {
-          scroll_position = ( parseInt(current_position, 10)- ((size - visible) + 1)) * lt_width;
         } else {
-                    console.log('3');
           current_object.first_click_scroll = 0;
-          scroll_position = (parseInt(current_position, 10) - (parseInt(current_object.last_position, 10))) * lt_width;
+          image_plugin.apply_style(current_position, visible);
         }
-        if(current_position >= 20 && current_object.last_position < 20) {
-           scroll_position += 6;
-           console.log('scrol+' + scroll_position);
-         } else if (current_position <= 20 && current_object.last_position > 20) {
-           scroll_position -= 7;
-           console.log('scrol-' + scroll_position);
-         }
-        $("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow");
+      },
+      apply_style : function(start_position, visible_item) {
+        for (var i = 0; i < visible_item; i++) {
+          $('#scroll a:eq(' + (parseInt(start_position, 10) + i - 1) +')').addClass('selected1');
+        }
       }
     };
     $.fn.dinesh_picture = function(options) {
-      var width = $('body').outerWidth();
-      image_width = Math.floor(width/5);
       var default_settings = {
-        image_width:  image_width +'px',
+        image_width: '375px',
         image_height: '500px',
         content_height: '540px',
-        list_width : '55px',
         image_visible: 5
       };
       return this.each(function () {
@@ -183,7 +167,7 @@ $(function() {
         //getting the image count
         size = $('.image_grid img').size();
         image_plugin.set_image_grid_size(size, default_settings.image_width, default_settings.image_height);
-        image_plugin.set_scroll_number_in_footer(size, default_settings.image_visible, default_settings.list_width);
+        image_plugin.set_scroll_number_in_footer(size, default_settings.image_visible);
         $('#picture_content').append("<a href = '#' id = previous></a>");
         $('#picture_content').append("<a href='#' id = next></a>");
         image_plugin.setData('picture_content');
@@ -199,7 +183,7 @@ $(function() {
         var current_object = $('#picture_content').data('dinesh_picture');
         $("#next").live('click', function(){
           current_object.current_position = ++current_object.current_position;
-          image_plugin.scroll_movement(current_object.current_position, size, default_settings.image_visible, default_settings.list_width);
+          image_plugin.scroll_movement(current_object.current_position, size, default_settings.image_visible);
           $("img").animate({"left": '-=' + default_settings.image_width}, "slow");
           current_object.first_click = 0;
           current_object.first_click_scroll = 0;
@@ -214,7 +198,7 @@ $(function() {
           current_object.first_click_scroll = 0;
           if(!((current_object.last_position >= ((size - default_settings.image_visible) + 1)) && (current_object.current_position>= ((size - default_settings.image_visible) + 1)))) {
             $("img").animate({"left": '+=' + default_settings.image_width}, "slow");
-            image_plugin.scroll_movement(current_object.current_position, size, default_settings.image_visible, default_settings.list_width);
+            image_plugin.scroll_movement(current_object.current_position, size, default_settings.image_visible);
           }
           image_plugin.remove_previous_position();
           image_plugin.show_current_position();
@@ -224,7 +208,7 @@ $(function() {
         $('#scroll a').live('click', function() {
           var current_position = $(this).text();
           current_object.current_position = current_position;
-          image_plugin.scroll_movement(current_position, size, default_settings.image_visible, default_settings.list_width);
+          image_plugin.scroll_movement(current_position, size, default_settings.image_visible);
           image_plugin.image_movement(default_settings.image_visible, size, current_position, default_settings.image_width);
           image_plugin.remove_previous_position();
           image_plugin.show_current_position();
