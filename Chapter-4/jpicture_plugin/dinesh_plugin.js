@@ -43,7 +43,7 @@ $(function() {
         $('#scroll').css({'width': (size * (lt_width)) });
         $('#scroll li').css({'width': list_width});
         $('#scroll').append('<div id = active></div>');
-        $('#active').css({'width': ((visible * (lt_width))) + 'px'});
+        // $('#active').css({'width': ((visible * (lt_width))) + 'px'});
         $('a').addClass('footer');
       },
       hide_arrows : function(visible, size, width, image_position) {
@@ -127,6 +127,32 @@ $(function() {
         }
         current_object.last_position = current_position;
       },
+      apply_style : function(start_position, visible_item, image_position, size) {
+        if ((start_position - image_position) <= image_position && start_position > image_position) {
+          for(var j = 0; j < image_position; j++ ) {
+            $('#scroll a:eq(' + ((parseInt(start_position, 10) -j) - 1) +')').addClass('selected1');
+          }
+          for (var i = 0; i <= (visible_item - image_position); i++) {
+            $('#scroll a:eq(' + (parseInt(start_position, 10) + i - 1) +')').addClass('selected1');
+          }
+        } else if(start_position > image_position && start_position <= (size - (visible_item - image_position))) {
+          for(var j = 0; j < image_position; j++ ) {
+            $('#scroll a:eq(' + ((parseInt(start_position, 10) -j) - 1) +')').addClass('selected1');
+          }
+          for (var i = 0; i <= (visible_item - image_position); i++) {
+            $('#scroll a:eq(' + (parseInt(start_position, 10) + i - 1) +')').addClass('selected1');
+          } 
+        } else if (start_position <= image_position) {
+            for (var i = 0; i < visible_item; i++) {
+              $('#scroll a:eq(' + (parseInt(i, 10)) +')').addClass('selected1');
+            }
+        } else if (start_position > (size - (visible_item - image_position))) {
+          var size = size - visible_item;
+          for (var i = 0; i < visible_item; i++) {
+            $('#scroll a:eq(' + (size + i) +')').addClass('selected1');
+          }
+        }
+      },
       show_current_position : function() {
         var current_object = $('#picture_content').data('dinesh_picture');
         var position = (parseInt(current_object.current_position, 10) - 1)
@@ -140,6 +166,7 @@ $(function() {
       scroll_movement : function(current_position, size, visible, list_width, image_position) {
         var scroll_position = 0;
         var lt_width = parseInt(list_width, 10) - 1;
+        $('#scroll a').removeClass('selected1');
         var current_object = $('#picture_content').data('dinesh_picture');
         console.log('pos' + current_position);
         console.log((current_object.last_position >= (size - visible )) + '  ' + (current_object.last_position < current_position) );
@@ -149,38 +176,46 @@ $(function() {
               if (current_object.first_click_scroll === 0) {
                 if(current_object.last_position == 0) {
                   console.log('1');
-                  scroll_position = (((parseInt(current_position, 10) - (parseInt(visible) - i)) - parseInt(current_object.last_position, 10)) * lt_width);
+                  image_plugin.apply_style((parseInt(current_position, 10)), visible, image_plugin, size);
+                  // scroll_position = (((parseInt(current_position, 10) - (parseInt(visible) - i)) - parseInt(current_object.last_position, 10)) * lt_width);
                 } else {
                   console.log('2');
-                  scroll_position = (((parseInt(current_position, 10) - parseInt(current_object.last_position)) - (visible- (image_position + i))) * lt_width);
+                  image_plugin.apply_style(current_position, visible, image_position, size);
+                  // scroll_position = (((parseInt(current_position, 10) - parseInt(current_object.last_position)) - (visible- (image_position + i))) * lt_width);
                 }
                 current_object.first_click_scroll++;
               }
+              image_plugin.apply_style(current_position, visible, image_position, size);
             }
           }
         } else if(current_object.last_position == 0) {
           console.log('32');
           current_object.first_click_scroll = 0;
-          scroll_position = (parseInt(current_position, 10) - image_position) * lt_width;
+          image_plugin.apply_style(current_position, visible, image_position, size);
+          // scroll_position = (parseInt(current_position, 10) - image_position) * lt_width;
         } else if ((current_object.last_position >= (size - (visible - image_position)) && (current_object.last_position < current_position))) {
           console.log('465');
           current_object.first_click_scroll = 0;
-          scroll_position = ( current_position - (size - (visible - (image_position - 1)))) * lt_width;
+          image_plugin.apply_style(current_position, visible, image_position, size);
+          // scroll_position = ( current_position - (size - (visible - (image_position - 1)))) * lt_width;
           console.log('pos' + scroll_position);
         } else if((current_object.last_position >= (size - (visible - image_position))) && (current_object.last_position > current_position )) {
           console.log('5');
           console.log('8888');
           current_object.first_click_scroll = 0;
-          scroll_position = ( parseInt(current_position, 10)- (size - (visible - image_position))) * lt_width;
+          image_plugin.apply_style(current_position, visible, image_position, size);
+          // scroll_position = ( parseInt(current_position, 10)- (size - (visible - image_position))) * lt_width;
         } else if (current_position <= image_position && current_object.last_position >= image_position){
           console.log('5555');
           current_object.first_click_scroll = 0;
-          scroll_position = (parseInt(current_position, 10) - ((parseInt(current_object.last_position, 10)) - (image_position - current_position))) * lt_width;
+          image_plugin.apply_style(current_position, visible, image_position, size);
+          // scroll_position = (parseInt(current_position, 10) - ((parseInt(current_object.last_position, 10)) - (image_position - current_position))) * lt_width;
           console.log(scroll_position);
         } else {
           console.log('678');
           current_object.first_click_scroll = 0;
-          scroll_position = (parseInt(current_position, 10) - (parseInt(current_object.last_position, 10)) ) * lt_width;
+          image_plugin.apply_style(current_position, visible, image_position, size);
+          // scroll_position = (parseInt(current_position, 10) - (parseInt(current_object.last_position, 10)) ) * lt_width;
           console.log(scroll_position);
         }
         if (current_object.last_position < current_position && current_position % 5 == 0) {
@@ -193,7 +228,7 @@ $(function() {
             scroll_position -= 8;
           }
         }
-        $("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow");
+        // $("#scroll #active").animate({"right": '-=' + scroll_position + "px"}, "slow");
       }
     };
     $.fn.dinesh_picture = function(options) {
@@ -280,6 +315,7 @@ $(function() {
           image_plugin.hide_arrows(default_settings.image_visible, size, default_settings.image_width, default_settings.image_position);
         });
         image_plugin.show_current_position();
+        image_plugin.apply_style(current_object.current_position, default_settings.image_visible, default_settings.image_position, size);
       });
     }
   }(jQuery));
